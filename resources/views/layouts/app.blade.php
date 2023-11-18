@@ -9,7 +9,7 @@
     <meta name="description" content="{{ $setting->company_meta_description }}">
     <meta name="author" content="">
     <link rel="icon" href="{{ $setting->company_favicon ?? 'favicon.ico'}}">
-    <title>@yield('title', config('app.name'))</title>
+    <title>@yield('title', $setting->company_meta_title ?? config('app.name'))</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{asset('dashboard/css/simplebar.css')}}">
     <!-- Fonts CSS -->
@@ -44,7 +44,12 @@
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('logout') }}">Logout</a>        
+                
+              <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{-- {{ method_field('DELETE') }} --}}
+                @csrf
+              </form>
             </div>
           </li>
         </ul>
@@ -87,55 +92,68 @@
             </li>
             <li class="nav-item w-100">
               <a class="nav-link" href="{{ route('menu.index') }}">
-                <i class="fe fe-menu fe-16"></i>
+                <i class="fe fe-list fe-16"></i>
                 <span class="ml-3 item-text">Menu Management</span>
               </a>
             </li>
             <li class="nav-item dropdown">
               <a href="#pages" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-layers fe-16"></i>
+                <i class="fe fe-menu fe-16"></i>
                 <span class="ml-3 item-text">Pages Management</span><span class="sr-only"></span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="pages">
                 <li class="nav-item active">
                   <a class="nav-link pl-3" href="{{route('homepage.sections')}}"><span class="ml-1 item-text">Home Page</span></a>
                 </li>
+              </ul>
+              <ul class="collapse list-unstyled pl-4 w-100" id="pages">
                 <li class="nav-item active">
-                  <a class="nav-link pl-3" href="/"><span class="ml-1 item-text">Products</span></a>
+                  <a class="nav-link pl-3" href="{{route('why.braghtech.sections')}}"><span class="ml-1 item-text">Why Braghtech</span></a>
                 </li>
-                
               </ul>
             </li>
             <li class="nav-item dropdown">
               <a href="#clients" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-layers fe-16"></i>
+                <i class="fe fe-book fe-16"></i>
                 <span class="ml-3 item-text">Clients Management</span><span class="sr-only"></span>
               </a>
               <ul class="collapse list-unstyled pl-4 w-100" id="clients">
                 <li class="nav-item active">
-                  <a class="nav-link pl-3" href="/"><span class="ml-1 item-text">Industries</span></a>
+                  <a class="nav-link pl-3" href="{{ route('category.index') }}"><span class="ml-1 item-text">Client Category</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link pl-3" href="/"><span class="ml-1 item-text">Clients</span></a>
+                  <a class="nav-link pl-3" href="{{ route('client.index') }}"><span class="ml-1 item-text">Clients</span></a>
                 </li>
                 
               </ul>
             </li>
             <li class="nav-item w-100">
-              <a class="nav-link" href="calendar.html">
-                <i class="fe fe-book fe-16"></i>
+              <a class="nav-link" href="{{ route('solutions.index') }}">
+                <i class="fe fe-grid fe-16"></i>
+                <span class="ml-3 item-text">Solutions</span>
+              </a>
+            </li>
+            <li class="nav-item w-100">
+              <a class="nav-link" href="{{ route('service.index') }}">
+                <i class="fe fe-server fe-16"></i>
+                <span class="ml-3 item-text">Services</span>
+              </a>
+            </li>
+            <li class="nav-item w-100">
+              <a class="nav-link" href="{{ route('partner.index') }}">
+                <i class="fe fe-user fe-16"></i>
                 <span class="ml-3 item-text">Partners</span>
               </a>
             </li>
             <li class="nav-item w-100">
-              <a class="nav-link" href="calendar.html">
-                <i class="fe fe-book fe-16"></i>
+              <a class="nav-link" href="{{route('submitted.forms.contacts')}}">
+                <i class="fe fe-folder fe-16"></i>
                 <span class="ml-3 item-text">Contact Forms</span>
               </a>
             </li>
             <li class="nav-item w-100">
               <a class="nav-link" href="{{route('general-settings')}}">
-                <i class="fe fe-book fe-16"></i>
+                <i class="fe fe-settings fe-16"></i>
                 <span class="ml-3 item-text">General Settings</span>
               </a>
             </li>

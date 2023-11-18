@@ -20,8 +20,5 @@ Route::group(['prefix' => 'v1', 'before' => 'v1'], function () {
     Route::resource('users', UserController::class);
     Route::get('homepage-sections', [PagesController::class, 'homepage'])->name('homepage.sections');
     Route::post('homepage-sections', [PagesController::class, 'updateHomepage'])->name('homepage.update');
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('contact-form', [HomeController::class, 'contactForm'])->name('contact.submit');
 });

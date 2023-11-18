@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        
     }
 
     /**
@@ -23,6 +24,41 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
+    public function contactForm(Request $request){
+   
+        $this->validate($request, [
+            'firstName' => 'nullable',
+            'lastName' => 'nullable',            
+            'businessEmail' => 'nullable',
+            'title' => 'nullable',         
+            'companyName' => 'nullable',
+            'companySize' => 'nullable',
+            'country' => 'nullable',           
+            'phoneNumber' => 'nullable',
+            'message' => 'nullable',           
+            'consent' => 'nullable',           
+            'consent2' => 'nullable'
+        ]);
+
+        $contact = Contact::create([
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'businessEmail' => $request->businessEmail,
+            'title' => $request->title,
+            'companyName' => $request->companyName,
+            'companySize' => $request->companySize,
+            'country' => $request->country,
+            'phoneNumber' => $request->phoneNumber,
+            'message' => $request->message,
+            'consent' => $request->consent,
+            'consent2' => $request->consent2,
+
+        ]);
+
+        return response()->json(['message' => 'success', 'data' => []], 200);
+
+    }
+    
     public function index(){
         return view('admin.pages.index');
     }
@@ -49,7 +85,7 @@ class HomeController extends Controller
             'section2_button1_text' => $section2['section2_button1_text'] ?? '',
             'section2_button2_text' => $section2['section2_button2_text'] ?? ''
         ];
-
+        
         return view('admin.pages.homepage', compact('section1','section2'));
         // return response()->json(['message' => 'success', 'data' => $sections], 200);
     }
