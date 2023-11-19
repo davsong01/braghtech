@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="{{ $setting->company_meta_description }}">
+    <meta name="description" content="{{ $setting->company_meta_description ?? 'Description'}}">
     <meta name="author" content="">
     <link rel="icon" href="{{ $setting->company_favicon ?? 'favicon.ico'}}">
     <title>@yield('title', $setting->company_meta_title ?? config('app.name'))</title>

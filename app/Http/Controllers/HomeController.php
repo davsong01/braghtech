@@ -67,9 +67,9 @@ class HomeController extends Controller
 
     }
 
-    // public function index(){
-    //     return view('admin.pages.index');
-    // }
+    public function index(){
+        return view('admin.pages.index');
+    }
 
     public function homepage()
     {
