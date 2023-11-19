@@ -82,7 +82,7 @@
                             @if($jump_menu)
                             @foreach ($jump_menu as $admin)    
                             <tr>
-                                <td> {{ $index1++ }}</td>
+                                <td> {{ $index++ }}</td>
                                 <td><p class="mb-0 text-muted"><strong>{{ $admin->name }}</strong> <br><a href="{{ $admin->url }}">{{ $admin->url }}</a></p></td>
                                 <td><p class="mb-0 text-muted"><strong>{{ ucfirst($admin->status) }}</strong></p></td>
                                 <td><p class="mb-0 text-muted"><strong>{{ $admin->order }}</strong></p></td>

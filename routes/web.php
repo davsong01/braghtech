@@ -31,24 +31,29 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::resource('users', UserController::class);
-Route::resource('menu', MenuController::class);
-Route:: resource('solutions', SolutionsController::class);
-Route:: resource('service', ServiceController::class);
-Route::resource( 'client', ClientController::class);
-Route:: resource('category', CategoryController::class);
-Route::resource('partner', PartnerController::class);
+Route::group([], function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('/', [HomeController::class, 'index'])->name('index');
+        Route::resource('users', UserController::class);
+        Route::resource('menu', MenuController::class);
+        Route:: resource('solutions', SolutionsController::class);
+        Route:: resource('service', ServiceController::class);
+        Route::resource( 'client', ClientController::class);
+        Route:: resource('category', CategoryController::class);
+        Route::resource('partner', PartnerController::class);
+        
+        Route::get('general-settings', [GeneralSettingController::class, 'index'])->name('general-settings');
+        Route::post('general-settings', [GeneralSettingController::class, 'store'])->name('general-settings.update');
+        Route::get('homepage-sections', [PagesController::class, 'homepage'])->name('homepage.sections');
+        Route::post('homepage-sections', [PagesController::class, 'updateHomepage'])->name('homepage.update');
+        
+        Route::get('why-braghtech.section', [PagesController::class, 'whyBraghtech'])->name('why.braghtech.sections');
+        Route::post('why-braghtech.section', [PagesController::class, 'updateWhyBraghtech'])->name('why.braghtech.update');
+        
+        Route::get('contact', [PagesController::class, 'contactForms'])->name('submitted.forms.contacts');
+        Route::get('delete-contact/{id}', [PagesController::class, 'deleteContactForm'])->name('contact.form.delete');
 
-Route::get('general-settings', [GeneralSettingController::class, 'index'])->name('general-settings');
-Route::post('general-settings', [GeneralSettingController::class, 'store'])->name('general-settings.update');
-Route::get('homepage-sections', [PagesController::class, 'homepage'])->name('homepage.sections');
-Route::post('homepage-sections', [PagesController::class, 'updateHomepage'])->name('homepage.update');
-
-Route::get('why-braghtech.section', [PagesController::class, 'whyBraghtech'])->name('why.braghtech.sections');
-Route::post('why-braghtech.section', [PagesController::class, 'updateWhyBraghtech'])->name('why.braghtech.update');
-
-Route::get('contact', [PagesController::class, 'contactForms'])->name('submitted.forms.contacts');
-Route::get('delete-contact/{id}', [PagesController::class, 'deleteContactForm'])->name('contact.form.delete');
+    });
+});
 

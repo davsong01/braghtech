@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    @if($setting->company_logo)
+                    @if(isset($setting->company_logo))
                     <div class="col-md-12" style="display:flex;margin-bottom: 10px;">
                         <div class="col-md-2" style="padding-left: 0px;">
                             <img src="{{ $setting->company_logo }}" alt="" style="width:64px">
@@ -55,7 +55,7 @@
                         <input type="file" required id="company_logo" class="form-control" name="company_logo" accept="image/*">
                     </div>
                     @endif
-                    @if($setting->company_favicon)
+                    @if(isset($setting->company_favicon))
                     <div class="col-md-12" style="display:flex">
                         <div class="col-md-2" style="padding-left: 0px;">
                             <img src="{{ $setting->company_favicon }}" alt="" style="width:64px">
