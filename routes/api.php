@@ -17,8 +17,13 @@ use App\Http\Controllers\PagesController;
 */
 
 Route::group(['prefix' => 'v1', 'before' => 'v1'], function () {
-    Route::resource('users', UserController::class);
-    Route::get('homepage-sections', [PagesController::class, 'homepage'])->name('homepage.sections');
-    Route::post('homepage-sections', [PagesController::class, 'updateHomepage'])->name('homepage.update');
-    Route::post('contact-form', [HomeController::class, 'contactForm'])->name('contact.submit');
+    Route::get('homepage', [HomeController::class, 'homepage']);
+    Route::get('menus', [HomeController::class, 'menus']);
+    Route::get('services', [HomeController::class, 'services']);
+    Route::get('solutions', [HomeController::class, 'solutions']);
+    Route::get('categories-and-clients', [HomeController::class, 'categoriesAndClients']);
+    Route::get('partners', [HomeController::class, 'partners']);
+    Route::get('why-braghtech', [HomeController::class, 'whyBraghtech']);
+    Route::get('company-settings', [HomeController::class, 'companySettings']);
+    Route::post('contact-form', [HomeController::class, 'contactForm']);
 });

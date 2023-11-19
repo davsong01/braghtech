@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\User;
 use App\Models\Contact;
+use App\Models\Partner;
+use App\Models\Service;
+use App\Models\Category;
+use App\Models\HomePage;
+use App\Models\Solutions;
 use Illuminate\Http\Request;
+use App\Models\GeneralSetting;
+use App\Models\WhyBraghtechPage;
 
 class HomeController extends Controller
 {
@@ -58,35 +66,106 @@ class HomeController extends Controller
         return response()->json(['message' => 'success', 'data' => []], 200);
 
     }
-    
-    public function index(){
-        return view('admin.pages.index');
-    }
+
+    // public function index(){
+    //     return view('admin.pages.index');
+    // }
 
     public function homepage()
     {
-        $home = HomePages::first();
+        $home = HomePage::first();
+
+        $section_1 = !empty($home->section_1) ? json_decode($home->section_1, true) : [];
+        $section_2 = !empty($home->section_2) ? json_decode($home->section_2, true) : [];
+        $section_3 = !empty($home->section_3) ? json_decode($home->section_3, true) : [];
+        $section_4 = !empty($home->section_4) ? json_decode($home->section_4, true) : [];
+        $section_5 = !empty($home->section_5) ? json_decode($home->section_5, true) : [];
         
-        $section1 = $home->section1 ? json_decode($home->section1, true) : [];
-       
-        $sections['section1'] = [
-            'section1_title' => $section1['section1_title'] ?? '',
-            'section1_text' => $section1['section1_text'] ?? '',
-            'section1_image' => $section1['section1_image'] ?? '',
-            'section1_button1_text' => $section1['section1_button1_text'] ?? '',
-            'section1_button2_text' => $section1['section1_button2_text'] ?? ''
+        $sol = !empty($section_2['solutions']) ?  json_decode($section_2['solutions']) : [];
+      
+        $solutions = Solutions::whereIn('id', $sol)->where('status','active')->orderBy('order','ASC')->get();
+        $section_2solutions = [];
+
+        foreach ($solutions as $key => $value) {
+            $section_2solutions[] = [
+                "title" => $value->title,
+                "image" => $value->image,
+                "link" => $value->link,
+                "description" => $value->description
+            ];
+        }
+        $section_2['solutions'] = $section_2solutions;
+
+        $serv = !empty($section_4['services']) ?  json_decode($section_4['services']) : [];
+        $services = Service::whereIn('id', $serv)->where('status', 'active')->orderBy('order', 'ASC')->get();
+        $section_4solutions = [];
+
+        foreach ($services as $key => $value) {
+            $section_4solutions[] = [
+                "title" => $value->title,
+                "image" => $value->image,
+                "description" => $value->description
+            ];
+        }
+        $section_4['services'] = $section_4solutions;
+
+        $all = [
+            'section_1' => $section_1,
+            'section_2' => $section_2,
+            'section_3' => $section_3,
+            'section_4' => $section_4,
+            'section_5' => $section_5,
         ];
-       
-        $section2 = $home->section2 ? json_decode($home->section2, true) : [];
-        $sections['section2'] = [
-            'section1_title' => $section2['section2_title'] ?? '',
-            'section2_text' => $section2['section2_text'] ?? '',
-            'section2_image' => $section2['section2_image'] ?? '',
-            'section2_button1_text' => $section2['section2_button1_text'] ?? '',
-            'section2_button2_text' => $section2['section2_button2_text'] ?? ''
-        ];
+
+        return response()->json(['message' => 'success', 'data' => $all], 200);
+    }
+
+    public function menus(){
+        $main_menu = Menu::orderBy('order', 'ASC')->where('status', 'active')->where('type', 'top')->get();
+        $jump_menu = Menu::orderBy('order', 'ASC')->where('status', 'active')->where('type', 'jump')->get();
+        $footer_menu = Menu::orderBy('order','ASC')->where('status','active')->where('type', 'footer')->get();
         
-        return view('admin.pages.homepage', compact('section1','section2'));
-        // return response()->json(['message' => 'success', 'data' => $sections], 200);
+        $data = [
+            'main_menus' => $main_menu,
+            'jump_menus' => $jump_menu,
+            'footer_menus' => $footer_menu,
+        ];
+
+        return response()->json(['message' => 'success', 'data' => $data], 200);
+
+    }
+
+    public function solutions(){
+        $solutions = Solutions::where('status', 'active')->orderBy('order', 'ASC')->get();
+        return response()->json(['message' => 'success', 'data' => $solutions], 200);
+    }
+
+    public function services()
+    {
+        $services = Service::where('status', 'active')->orderBy('order', 'ASC')->get();
+        return response()->json(['message' => 'success', 'data' => $services], 200);
+    }
+
+    public function categoriesAndClients(){
+        $cac = Category::with(['client'=>function($query){
+            return $query->where('status','active')->orderBy('order', 'ASC')->get();
+        }])->where('status', 'active')->orderBy('order', 'ASC')->get();
+      
+        return response()->json(['message' => 'success', 'data' => $cac], 200);
+    }
+
+    public function partners(){
+        $partners = Partner::where('status', 'active')->orderBy('order', 'ASC')->get();
+        return response()->json(['message' => 'success', 'data' => $partners], 200);
+    }
+
+    public function whyBraghtech(){
+        $sections = WhyBraghtechPage::first();
+        return response()->json(['message' => 'success', 'data' => $sections], 200);
+    }
+
+    public function companySettings(){
+        $setting = GeneralSetting::first();
+        return response()->json(['message' => 'success', 'data' => $setting], 200);
     }
 }

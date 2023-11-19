@@ -431,7 +431,7 @@
                                     </div>
                                     <div class="col-md-10" style="padding-right: 0;">
                                         <div class="form-group mb-3">
-                                            <label for="section5_image">Replace Section Image</label>
+                                            <label for="section5_image">Replace Section Image (1028px x 195px)</label>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="section5_image" name="section5_image" accept="image/*">
                                                 <label class="custom-file-label" for="section5_image">Choose file</label>
