@@ -20,6 +20,7 @@ class Contact extends Model
         'phoneNumber',
         'message',
         'consent',
-        'consent2'
+        'consent2',
+        'status'
     ];
 }

@@ -52,7 +52,11 @@ Route::group([], function () {
         Route::post('why-braghtech.section', [PagesController::class, 'updateWhyBraghtech'])->name('why.braghtech.update');
         
         Route::get('contact', [PagesController::class, 'contactForms'])->name('submitted.forms.contacts');
+        Route::get('contact/{id}', [PagesController::class, 'resolveContactForms'])->name('resolve-contact');
+        
         Route::get('delete-contact/{id}', [PagesController::class, 'deleteContactForm'])->name('contact.form.delete');
+        Route::get('profile', [UserController::class, 'show'])->name('profile');
+        Route::post('profile', [UserController::class, 'updateProfile'])->name('update.profile');
 
     });
 });

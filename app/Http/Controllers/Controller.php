@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -28,5 +30,17 @@ class Controller extends BaseController
         $imageFile->save($folder . '/' . $imageName);
 
         return $folder.'/'.$imageName;
+    }
+
+    public function sendEmail($data){
+        try {
+            Mail::to($data['recipient'])->send(new Contact($data));
+            //code...
+        } catch (\Throwable $th) {
+            // dd($th->getMessage(), $data['recipient']);
+        }
+        
+        return;
+
     }
 }

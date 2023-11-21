@@ -35,19 +35,21 @@
         <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
           <i class="fe fe-menu navbar-toggler-icon"></i>
         </button>
-        
+        <div>
+          Hi {{ auth()->user()->name }} ({{ ucfirst(str_replace("_", " ", auth()->user()->role))}})
+        </div>
         <ul class="nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="avatar avatar-sm mt-2">
-                <img src="./assets/avatars/face-1.jpg" alt="..." class="avatar-img rounded-circle">
+                <img src="{{ asset(auth()->user()->avatar ?? 'avatars/user.png') }}" alt="..." class="avatar-img rounded-circle">
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>        
               <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('logout') }}">Logout</a>        
                 
               <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{-- {{ method_field('DELETE') }} --}}
                 @csrf
               </form>
             </div>
@@ -78,6 +80,12 @@
           </div>
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
+              <li class="nav-item w-100">
+                <a class="nav-link" href="/">
+                  <i class="fe fe-grid fe-16"></i>
+                  <span class="ml-3 item-text">Dashboard</span>
+                </a>
+              </li>
               <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                 <i class="fe fe-users fe-16"></i>
                 <span class="ml-3 item-text">Admin Management</span><span class="sr-only">(current)</span>

@@ -37,6 +37,10 @@
                         <label for="url">Company Phone</label>
                         <input type="text" required id="company_phone" placeholder="Enter company phone" class="form-control" name="company_phone" value="{{$setting->company_phone ?? old('company_phone')}}">
                     </div>
+                    <div class="form-group mb-3">
+                        <label for="url">Support Email (This email address will receive emails from the contact form)</label>
+                        <input type="text" required id="support_email" placeholder="Enter support email" class="form-control" name="support_email" value="{{$setting->support_email ?? old('support_email')}}">
+                    </div>
                 </div>
                 <div class="col-md-6">
                     @if(isset($setting->company_logo))

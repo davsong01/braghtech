@@ -1,13 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="col-12">
-    <h2 class="page-title">Edit {{ $user->name }}</h2>
+    <h2 class="page-title">Edit Profile</h2>
     <div class="card shadow mb-4">
         @include('includes.alerts')
         <div class="card-body">
-            <form action="{{route('users.update',$user->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('update.profile',$user->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PATCH')
             <div class="row" style="margin-bottom:10px">
                 <div class="col-md-12">
                     <img src="{{ $user->avatar }}" alt="avatar" class="avatar-img rounded-circle" style="width: 120px;">
@@ -34,15 +33,7 @@
                         <label for="example-email">Email</label>
                         <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="{{$user->email ?? old('email')}}" required>
                     </div>
-                    <div class="form-group mb-3">
-                        <label for="role">Role</label>
-                        <select class="custom-select" id="role" name="role" required>
-                            <option selected value="">Select role</option>
-                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : ''}}>Admin</option>
-                            <option value="general_staff" {{ $user->role == 'general_staff' ? 'selected' : ''}}>General Staff</option>
-                            <option value="developer" {{ $user->role == 'developer' ? 'selected' : ''}}>Developer</option>
-                        </select>
-                    </div>
+                    
                     <div class="form-group mb-3">
                         <label for="customFile">Avatar (Optional)</label>
                         <div class="custom-file">

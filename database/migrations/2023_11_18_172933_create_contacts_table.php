@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('message')->nullable();
             $table->string('consent')->nullable();
             $table->string('consent2')->nullable();
+            $table->string('status')->nullable();
 
             $table->timestamps();
         });

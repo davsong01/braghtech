@@ -176,8 +176,18 @@ class PagesController extends Controller
     {
         $index = 1;
 
-        $contacts = Contact::orderby('created_at', 'DESC')->get();
+        $contacts = Contact::orderby('status', 'ASC')->orderby('created_at', 'DESC')->get();
         return view('admin.pages.contacts', compact('contacts','index'));
+    }
+
+    public function resolveContactForms($id){
+        $contact = Contact::where('id', $id)->first();
+        
+        if($contact){
+            $contact->update(['status' => 'resolved']);
+        }
+
+        return back()->with('message','Resolved succesfully');
     }
 
     public function deleteContactForm($id)

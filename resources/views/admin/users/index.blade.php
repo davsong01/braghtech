@@ -49,7 +49,13 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="{{route('users.edit',$admin->id)}}">Edit</a>
-                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('destroy-user').submit()" href="{{ route('users.destroy', $admin->id) }}">Delete</a>        
+                
+                        <form id="destroy-user" onsubmit="return confirm('Are you really sure?');" action="{{ route('users.destroy', $admin->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                        </div>
                         </div>
                     </td>
                 </tr>

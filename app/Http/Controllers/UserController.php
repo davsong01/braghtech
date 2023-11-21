@@ -66,9 +66,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id=null)
     {
-        //
+        $user = auth()->user();
+        return view('admin.users.profile', compact('user'));
     }
 
     /**
@@ -116,6 +117,42 @@ class UserController extends Controller
         ]);
 
         return back()->with('message', 'Record successfully updated!');
+    }
+
+    public function updateProfile(Request $request, User $user)
+    {
+        $user = auth()->user();
+       
+        $data = $this->validate($request, [
+            "name" => "required",
+            "phone" => "required",
+            "avatar" => "nullable",
+            "password" => "nullable",
+            "email" => "required|unique:users,email," . $user->id,
+        ]);
+
+        // password
+        if ($request->password) {
+            $password = Hash::make($request->password);
+        } else {
+            $password = $user->password;
+        }
+        // Avatar
+        if ($request->avatar) {
+            $avatar = url('/') . '/' . $this->uploadImage($request->avatar, 'avatars', 400, 400);
+        } else {
+            $avatar = $user->avatar;
+        }
+
+        $user->update([
+            "name" => $data['name'],
+            "phone" => $data['phone'],
+            "avatar" => $avatar,
+            "password" => $password,
+            "email" => $data['email'],
+        ]);
+
+        return back()->with('message', 'Profile successfully updated!');
     }
 
     /**

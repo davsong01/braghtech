@@ -29,7 +29,13 @@
                             <tr>
                                 <td> {{ $index++ }}</td>
                                 <td>
-                                    <p class="mb-0 text-muted"><strong>{{ $contact->firstName . ' ' . $contact->lastName }}</strong> <br>{{ $contact->email }}</p>
+                                    <p class="mb-0 text-muted"><strong>{{ $contact->firstName . ' ' . $contact->lastName }}</strong> <br>{{ $contact->businessEmail }} <br>
+                                        @if($contact->status == 'pending')
+                                        <button data-toggle="modal" data-target="#varyModal-{{$contact->id}}" class="btn btn-danger btn-sm">Pending Resolution</button>
+                                        @else 
+                                        <button data-toggle="modal" data-target="#varyModal-{{$contact->id}}" class="btn btn-success btn-sm">Resolved</button>
+                                        @endif
+                                    </p>
                                 </td>
                                 <td><p class="mb-0 text-muted"><strong>{{ $contact->phoneNumber }}</strong></p></td>
                                 <td><p class="mb-0 text-muted"><strong>{{ $contact->message }}</strong></p></td>
@@ -102,6 +108,13 @@
                                                     <textarea class="form-control" id="message-text" disabled>{{$contact->message}}</textarea>
                                                     </div>
                                             </div>
+                                            @if($contact->status == 'pending')
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <a onclick="return confirm('Are you really sure?');" href="{{route('resolve-contact', $contact->id)}}" class="btn btn-success btn-sm">Mark as Resolved</a>
+                                                </div>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

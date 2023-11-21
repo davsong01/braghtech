@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->string('status')->default('inactive');
             $table->string('order')->default(0);
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
