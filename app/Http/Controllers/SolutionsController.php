@@ -38,6 +38,7 @@ class SolutionsController extends Controller
             'image' => 'nullable',
             'description' => 'required',
             'link' => 'nullable',
+            'link_name' => 'required',
             'order' => 'required',
             'status' => 'required'
         ]);
@@ -86,6 +87,7 @@ class SolutionsController extends Controller
             'image' => 'nullable',
             'description' => 'required',
             'link' => 'nullable',
+            'link_name' => 'required',
             'order' => 'required',
             'status' => 'required'
         ]);

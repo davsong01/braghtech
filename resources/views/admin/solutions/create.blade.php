@@ -29,6 +29,10 @@
                         <input type="text" id="url" class="form-control" placeholder="url" value="{{old('url')}}" name="url">
                     </div>
                     <div class="form-group mb-3">
+                        <label for="link_name">Link Name</label>
+                        <input type="text" id="link_name" class="form-control" name="link_name" value="{{ old('link_name')}}" placeholder="link_name" required>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="simpleinput">Status</label>
                         <select class="custom-select" id="status" name="status" required>
                             <option selected value="">Select Status</option>

@@ -204,7 +204,7 @@ class HomeController extends Controller
 
     public function companySettings(){
         $setting = GeneralSetting::first();
-        return response()->json(['message' => 'success', 'data' => $setting], 200);
+        return response()->json(['message' => 'success', 'data' => $setting ?? []], 200);
     }
 
 }
