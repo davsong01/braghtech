@@ -106,9 +106,9 @@ class SolutionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Solutions $solutions)
+    public function destroy(Solutions $solution)
     {
-        $solutions->delete();
+        $solution->delete();
         return back()->with('success', 'Deleted successfully!');
     }
 }

@@ -52,13 +52,12 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{route('menu.edit',$admin->id)}}">Edit</a>
                                     
-                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('menu.destroy', $admin->id) }}">Delete</a>        
+                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('menu-form{{$admin->id}}').submit()" href="{{ route('menu.destroy', $admin->id) }}">Delete</a>        
                                     
-                                
-                                <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('menu.destroy', $admin->id) }}" method="POST" style="display: none;">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                </form>
+                                    <form id="menu-form{{$admin->id}}" onsubmit="return confirm('Are you really sure?');" action="{{ route('menu.destroy', $admin->id) }}" method="POST" style="display: none;">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    </form>
                                     </div>
                                 </td>
                             </tr>
@@ -92,10 +91,10 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{route('menu.edit',$admin->id)}}">Edit</a>
                                     
-                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('menu.destroy', $admin->id) }}">Delete</a>        
+                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('menu-form{{$admin->id}}').submit()" href="{{ route('menu.destroy', $admin->id) }}">Delete</a>        
                                     
                                 
-                                <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('menu.destroy', $admin->id) }}" method="POST" style="display: none;">
+                                <form id="menu-form{{$admin->id}}" onsubmit="return confirm('Are you really sure?');" action="{{ route('menu.destroy', $admin->id) }}" method="POST" style="display: none;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 </form>
@@ -132,10 +131,10 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{route('menu.edit',$admin->id)}}">Edit</a>
                                     
-                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('menu.destroy', $admin->id) }}">Delete</a>        
+                                    <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form{{$admin->id}}').submit()" href="{{ route('menu.destroy', $admin->id) }}">Delete</a>        
                                     
                                 
-                                <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('menu.destroy', $admin->id) }}" method="POST" style="display: none;">
+                                <form id="delete-form{{$admin->id }}" onsubmit="return confirm('Are you really sure?');" action="{{ route('menu.destroy', $admin->id) }}" method="POST" style="display: none;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 </form>

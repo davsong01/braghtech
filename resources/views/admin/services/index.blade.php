@@ -37,9 +37,9 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="{{route('service.edit',$admin->id)}}">Edit</a>
-                                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('service.destroy', $admin->id) }}">Delete</a>        
+                                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form{{$admin->id}}').submit()" href="{{ route('service.destroy', $admin->id) }}">Delete</a>        
                                 
-                                <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('service.destroy', $admin->id) }}" method="POST" style="display: none;">
+                                <form id="delete-form{{$admin->id}}" onsubmit="return confirm('Are you really sure?');" action="{{ route('service.destroy', $admin->id) }}" method="POST" style="display: none;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 </form>

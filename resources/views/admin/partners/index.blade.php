@@ -36,14 +36,15 @@
                             </td>
                             <td>{{ $admin->order }}</td>
                             <td>{{ ucfirst($admin->status) }}</td>
-                            <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <td>
+                                <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="text-muted sr-only">Action</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="{{route('partner.edit',$admin->id)}}">Edit</a>
-                                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" href="{{ route('partner.destroy', $admin->id) }}">Delete</a>        
+                                <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('delete-form{{$admin->id}}').submit()" href="{{ route('partner.destroy', $admin->id) }}">Delete</a>        
                                 
-                                <form id="logout-form" onsubmit="return confirm('Are you really sure?');" action="{{ route('partner.destroy', $admin->id) }}" method="POST" style="display: none;">
+                                <form id="delete-form{{$admin->id}}" onsubmit="return confirm('Are you really sure?');" action="{{ route('partner.destroy', $admin->id) }}" method="POST" style="display: none;">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                                 </form>

@@ -106,5 +106,6 @@ class ServiceController extends Controller
     {
         $service->delete();
         return back()->with('success', 'Deleted successfully!');
+
     }
 }

@@ -105,6 +105,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-group mb-3">
+                                    <label for="our_vision_text">Our Vision Title</label>
+                                    <input class="form-control" type="text" name="our_vision_title" required value="{{ $why->our_vision_title ?? old('our_vision_title') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
                                     <label for="our_vision_text">Our Vision Text</label>
                                     <textarea class="form-control" id="summary-ckeditor3" name="our_vision_text" cols="500" required value="{{ $why->our_vision_text ?? old('our_vision_text') }}">{!! $why->our_vision_text ?? old('our_vision_text') !!}</textarea>
                                 </div>
